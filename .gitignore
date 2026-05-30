@@ -1,0 +1,13 @@
+# Server (Backend) ki .env files ko secure rakhne ke liye
+**/server/.env
+**/server/.env.local
+
+# Pure project ke node_modules ko ignore karne ke liye
+**/node_modules/
+
+# Production builds (dist ya build folders)
+**/dist/
+**/build/
+
+# System files (Faltu files)
+.DS_Store
