@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:7000/api/tasks/login",
+        "https://task-manager-production-d785.up.railway.app/api/tasks/login",
         loginForm
       );
       console.log(res.data);

@@ -185,7 +185,7 @@ const ShowTask = () => {
 
   const viewTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:7000/api/tasks/getTasks", {
+      const res = await axios.get("https://task-manager-production-d785.up.railway.app/api/tasks/getTasks", {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       setTasks(res.data);
@@ -200,7 +200,7 @@ const ShowTask = () => {
     if (task.trim() === "") return;
     try {
       await axios.post(
-        "http://localhost:7000/api/tasks/addTask",
+        "https://task-manager-production-d785.up.railway.app/api/tasks/addTask",
         { text: task },
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
@@ -213,7 +213,7 @@ const ShowTask = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:7000/api/tasks/deleteTask/${id}`, {
+      await axios.delete(`https://task-manager-production-d785.up.railway.app/api/tasks/deleteTask/${id}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       viewTasks();

@@ -21,7 +21,7 @@ const Signup = () => {
     console.log(signupForm);
     try {
       const res = await axios.post(
-        "http://localhost:7000/api/tasks/signup",
+        "https://task-manager-production-d785.up.railway.app/api/tasks/signup",
         signupForm
       );
       console.log(res.data);
