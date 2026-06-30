@@ -1,177 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
-// const ShowTask = () => {
-//   const [task, setTask] = useState("");
-//   const [tasks, setTasks] = useState([]);
-//   const navigate = useNavigate();
-
-//   const getToken = () => localStorage.getItem("token");
-
-//   // GET TASKS
-//   const viewTasks = async () => {
-//     try {
-//       const res = await axios.get(
-//         "http://localhost:7000/api/tasks/getTasks",
-//         {
-//           headers: {
-//             Authorization: `Bearer ${getToken()}`
-//           }
-//         }
-//       );
-
-//       setTasks(res.data);
-
-//     } catch (error) {
-//       console.log(error.response?.data || error.message);
-//     }
-//   };
-
-//   // LOAD ON PAGE OPEN
-//   useEffect(() => {
-//     viewTasks();
-//   }, []);
-
-//   // ADD TASK
-//   const addTask = async () => {
-//     if (task.trim() === "") return;
-
-//     try {
-//       await axios.post(
-//         "http://localhost:7000/api/tasks/addTask",
-//         { text: task },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${getToken()}`
-//           }
-//         }
-//       );
-
-//       setTask("");
-//       viewTasks();
-
-//     } catch (error) {
-//       console.log(error.response?.data || error.message);
-//     }
-//   };
-
-//   // DELETE TASK
-//   const deleteTask = async (id) => {
-//     try {
-//       await axios.delete(
-//         `http://localhost:7000/api/tasks/deleteTask/${id}`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${getToken()}`
-//           }
-//         }
-//       );
-
-//       viewTasks();
-
-//     } catch (error) {
-//       console.log(error.response?.data || error.message);
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gray-900">
-
-//       <nav className="bg-gray-950 border-b border-gray-800">
-//         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-
-//           <h1 className="text-white font-semibold text-lg">
-//             Task Manager
-//           </h1>
-
-//           <div className="flex gap-2">
-
-//             <button
-//               className="bg-blue-600 px-4 py-2 rounded-lg text-white"
-//               onClick={() => navigate("/login")}
-//             >
-//               Login
-//             </button>
-
-//             <button
-//               className="bg-green-600 px-4 py-2 rounded-lg text-white"
-//               onClick={() => navigate("/signup")}
-//             >
-//               Signup
-//             </button>
-
-//           </div>
-
-//         </div>
-//       </nav>
-
-//       <div className="flex items-center justify-center p-4 mt-10">
-
-//         <div className="w-full max-w-md bg-gray-800 rounded-2xl shadow-lg p-6">
-
-//           <h2 className="text-xl text-white mb-4 text-center">
-//             Your Tasks
-//           </h2>
-
-//           <div className="flex gap-2 mb-4">
-
-//             <input
-//               type="text"
-//               placeholder="Enter your task..."
-//               className="flex-1 px-3 py-2 rounded-lg bg-gray-700 text-white outline-none"
-//               value={task}
-//               onChange={(e) => setTask(e.target.value)}
-//             />
-
-//             <button
-//               onClick={addTask}
-//               className="bg-blue-600 px-4 py-2 rounded-lg text-white"
-//             >
-//               Add
-//             </button>
-
-//           </div>
-
-//           <div className="space-y-2 max-h-80 overflow-y-auto">
-
-//             {tasks.length === 0 ? (
-//               <p className="text-gray-400 text-center">
-//                 No tasks yet
-//               </p>
-//             ) : (
-//               tasks.map((t) => (
-//                 <div
-//                   key={t._id}
-//                   className="flex justify-between items-center bg-gray-700 px-3 py-2 rounded-lg"
-//                 >
-//                   <span className="text-white">
-//                     {t.text}
-//                   </span>
-
-//                   <button
-//                     onClick={() => deleteTask(t._id)}
-//                     className="text-red-400"
-//                   >
-//                     Delete
-//                   </button>
-
-//                 </div>
-//               ))
-//             )}
-
-//           </div>
-
-//         </div>
-
-//       </div>
-
-//     </div>
-//   );
-// };
-
-// export default ShowTask;
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -185,7 +11,7 @@ const ShowTask = () => {
 
   const viewTasks = async () => {
     try {
-      const res = await axios.get("https://task-manager-production-d785.up.railway.app/api/tasks/getTasks", {
+      const res = await axios.get("https://task-manager-production-68f7.up.railway.app/api/tasks/getTasks", {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       setTasks(res.data);
@@ -200,7 +26,7 @@ const ShowTask = () => {
     if (task.trim() === "") return;
     try {
       await axios.post(
-        "https://task-manager-production-d785.up.railway.app/api/tasks/addTask",
+        "https://task-manager-production-68f7.up.railway.app/api/tasks/addTask",
         { text: task },
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
@@ -213,7 +39,7 @@ const ShowTask = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`https://task-manager-production-d785.up.railway.app/api/tasks/deleteTask/${id}`, {
+      await axios.delete(`https://task-manager-production-68f7.up.railway.app/api/tasks/deleteTask/${id}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       viewTasks();
