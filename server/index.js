@@ -14,12 +14,37 @@ app.use(express.json());
 
 app.use("/api/tasks", taskRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-  console.log("MongoDB connected");
+let isConnected = false;
 
-  app.listen(process.env.PORT || 3000, () => {
-    console.log("Server running");
+async function connectDB() {
+  if (isConnected) return;
+
+  if (mongoose.connection.readyState === 1) {
+    isConnected = true;
+    return;
+  }
+
+  await mongoose.connect(process.env.MONGO_URI);
+  isConnected = true;
+  console.log("MongoDB connected");
+}
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Database connection failed" });
+  }
+});
+
+if (require.main === module) {
+  connectDB().then(() => {
+    app.listen(process.env.PORT || 3000, () => {
+      console.log("Server running");
+    });
   });
-})
-.catch((err) => console.log(err));
+}
+
+module.exports = app;
