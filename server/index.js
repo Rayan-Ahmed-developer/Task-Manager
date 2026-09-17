@@ -18,7 +18,7 @@ async function connectDB() {
   if (mongoose.connection.readyState === 1) return;
 
   if (!dbPromise) {
-    dbPromise = mongoose.connect(process.env.MONGO_URI, {
+    dbPromise = mongoose.connect(process.env.dbUrl, {
       serverSelectionTimeoutMS: 10000,
       bufferCommands: false,
     });
