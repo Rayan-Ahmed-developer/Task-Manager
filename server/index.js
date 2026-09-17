@@ -12,21 +12,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/tasks", taskRoutes);
-
-let isConnected = false;
+let dbPromise = null;
 
 async function connectDB() {
-  if (isConnected) return;
+  if (mongoose.connection.readyState === 1) return;
 
-  if (mongoose.connection.readyState === 1) {
-    isConnected = true;
-    return;
+  if (!dbPromise) {
+    dbPromise = mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 10000,
+      bufferCommands: false,
+    });
   }
 
-  await mongoose.connect(process.env.MONGO_URI);
-  isConnected = true;
-  console.log("MongoDB connected");
+  try {
+    await dbPromise;
+    console.log("MongoDB connected");
+  } catch (err) {
+    dbPromise = null;
+    throw err;
+  }
 }
 
 app.use(async (req, res, next) => {
@@ -38,6 +42,8 @@ app.use(async (req, res, next) => {
     res.status(500).json({ error: "Database connection failed" });
   }
 });
+
+app.use("/api/tasks", taskRoutes);
 
 if (require.main === module) {
   connectDB().then(() => {
