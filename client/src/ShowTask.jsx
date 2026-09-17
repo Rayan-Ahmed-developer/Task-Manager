@@ -11,7 +11,7 @@ const ShowTask = () => {
 
   const viewTasks = async () => {
     try {
-      const res = await axios.get("https://task-manager-production-68f7.up.railway.app/api/tasks/getTasks", {
+      const res = await axios.get("https://task-manager-p7xk.vercel.app/api/tasks/getTasks", {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       setTasks(res.data);
@@ -26,7 +26,7 @@ const ShowTask = () => {
     if (task.trim() === "") return;
     try {
       await axios.post(
-        "https://task-manager-production-68f7.up.railway.app/api/tasks/addTask",
+        "https://task-manager-p7xk.vercel.app/api/tasks/addTask",
         { text: task },
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );
@@ -39,7 +39,7 @@ const ShowTask = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`https://task-manager-production-68f7.up.railway.app/api/tasks/deleteTask/${id}`, {
+      await axios.delete(`https://task-manager-p7xk.vercel.app/api/tasks/deleteTask/${id}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
       viewTasks();
